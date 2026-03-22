@@ -1,25 +1,105 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import MobileMenu from './components/MobileMenu';
+import Toast from './components/Toast';
+import Hero from './components/Hero';
+import ChartsSection from './components/ChartsSection';
+import DatasetsSection from './components/DatasetsSection';
+import FairPrinciplesSection from './components/FairPrinciplesSection';
+import CTASection from './components/CTASection';
+import AuthModal from './components/AuthModal';
+import Footer from './components/Footer';
+import './styles/App.css';
 
-function App() {
+const App = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(3);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastVisible, setToastVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [language, setLanguage] = useState('EN');
+
+  const showToast = (message) => {
+    setToastMessage(message);
+    setToastVisible(true);
+  };
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.body.classList.toggle('dark-mode');
+    showToast(isDarkMode ? 'Light mode activated' : 'Dark mode activated');
+  };
+
+  const handleNotification = () => {
+    showToast(`🔔 You have ${notificationCount} new notifications: New dataset releases, API updates, and market alerts`);
+    setNotificationCount(0);
+  };
+
+  const handleLanguageChange = (lang, label) => {
+    setLanguage(lang);
+    showToast(`🌍 Language switched to ${label} (demo interface)`);
+  };
+
+  const handleLogin = (email, password) => {
+    showToast('🎉 Welcome to KilimoSTAT! Access granted to FAIR data platform.');
+  };
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    showToast('✨ Welcome to KilimoSTAT - Kenya\'s FAIR open data platform');
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header
+        language={language}
+        notificationCount={notificationCount}
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={toggleDarkMode}
+        onNotification={handleNotification}
+        onLanguageChange={handleLanguageChange}
+        onOpenModal={() => setIsModalOpen(true)}
+        onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+      />
+      
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        onOpenModal={() => {
+          setIsModalOpen(true);
+          setIsMobileMenuOpen(false);
+        }}
+      />
+      
+      <Toast
+        message={toastMessage}
+        isVisible={toastVisible}
+        onClose={() => setToastVisible(false)}
+      />
+      
+      <Hero />
+      <ChartsSection showToast={showToast} />
+      <DatasetsSection showToast={showToast} />
+      <FairPrinciplesSection showToast={showToast} />
+      <CTASection showToast={showToast} />
+      
+      <AuthModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onLogin={handleLogin}
+      />
+      
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;
