@@ -22,9 +22,9 @@ const Footer = () => {
           </div>
           <div>
             <h4>Resources</h4>
-            <a href="#" style={{ display: 'block' }}>Data Catalog</a>
-            <a href="#" style={{ display: 'block' }}>API Console</a>
-            <a href="#" style={{ display: 'block' }}>Documentation</a>
+            <a href="https://statistics.kilimo.go.ke/api/redoc/" style={{ display: 'block' }}>API Documentation</a>
+            <a href="https://statistics.kilimo.go.ke/api/swagger/" style={{ display: 'block' }}>API Console</a>
+            <a href="#" style={{ display: 'block' }}>FAQ</a>
           </div>
           <div>
             <h4>Connect</h4>

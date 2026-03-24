@@ -16,21 +16,21 @@ const DatasetsSection = ({ showToast }) => {
             icon="fa-corn"
             title="Crop Production"
             description="Maize, beans, wheat, rice yields by county"
-            doi="10.5072/kilimo.crop.2025"
+            doi="In Maintenance Mode"
             onClick={() => handleDatasetInfo('Kenya Crop Production 2020-2025')}
           />
           <DataCard
             icon="fa-chart-line"
             title="Market Intelligence"
             description="Daily wholesale & retail prices across 47 counties"
-            doi="10.5072/kilimo.market.2025"
+            doi="In Maintenance Mode"
             onClick={() => handleDatasetInfo('Kenya Market Prices 2025')}
           />
           <DataCard
             icon="fa-water"
             title="Climate & Irrigation"
             description="Rainfall patterns, water usage, drought indices"
-            doi="10.5072/kilimo.climate.2025"
+            doi="In Maintenance Mode"
             onClick={() => handleDatasetInfo('Climate & Irrigation Data')}
           />
         </div>
